@@ -1,9 +1,7 @@
-<script setup lang="ts">
-import Whiteboard from './components/Whiteboard.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <Whiteboard />
+  <router-view />
 </template>
 
 <style scoped></style>

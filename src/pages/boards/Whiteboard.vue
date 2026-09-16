@@ -1,5 +1,6 @@
 <script setup>
-import BoardNode from './BoardNode.vue'
+import { defineComponent } from 'vue'
+import BoardNode from './components/BoardNode.vue'
 </script>
 
 <template>
