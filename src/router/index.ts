@@ -5,16 +5,29 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/',
+      component: () => import('@/layouts/AppLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '/boards',
+          name: 'boards',
+          component: () => import('@/pages/boards/Whiteboard.vue'),
+          meta: { requiresAuth: true },
+        },
+      ],
+    },
+    {
       path: '/login',
       name: 'login',
-      component: () => import('@/pages/login/Login.vue'),
+      component: () => import('@/pages/auth/LoginPage.vue'),
       meta: { requiresAuth: false },
     },
     {
-      path: '/home',
-      name: 'home',
-      component: () => import('@/pages/boards/Whiteboard.vue'),
-      meta: { requiresAuth: true },
+      path: '/register',
+      name: 'register',
+      component: () => import('@/pages/auth/RegisterPage.vue'),
+      meta: { requiresAuth: false },
     },
   ],
 })
@@ -31,7 +44,7 @@ router.beforeEach(async (to) => {
   }
 
   if (to.name === 'login' && authStore.isAuthenticated) {
-    return { name: 'home' }
+    return { name: 'dashboard' }
   }
 
   return true

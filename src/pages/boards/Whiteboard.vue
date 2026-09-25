@@ -1,5 +1,4 @@
-<script setup>
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import BoardNode from './components/BoardNode.vue'
 </script>
 
@@ -12,7 +11,12 @@ import BoardNode from './components/BoardNode.vue'
         background-size: 24px 24px;
       "
     >
-      <BoardNode />
+      <BoardNode
+        title="Sample Node"
+        type="note"
+        content="This is a sample content"
+        :coordinates="{ x: 120, y: 120 }"
+      />
     </div>
   </div>
 </template>

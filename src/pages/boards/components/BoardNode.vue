@@ -1,13 +1,22 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const x = ref(120)
-const y = ref(120)
+interface BoardNodeProps {
+  title: string
+  type: string
+  content: string
+  coordinates: { x: number; y: number }
+}
+
+const { title, type, content, coordinates } = defineProps<BoardNodeProps>()
+
+const x = ref(coordinates.x)
+const y = ref(coordinates.y)
 
 let offsetX = 0
 let offsetY = 0
 
-function startDrag(event) {
+function startDrag(event: PointerEvent) {
   offsetX = event.clientX - x.value
   offsetY = event.clientY - y.value
 
@@ -15,7 +24,7 @@ function startDrag(event) {
   window.addEventListener('pointerup', stopDrag)
 }
 
-function onDrag(event) {
+function onDrag(event: PointerEvent) {
   x.value = event.clientX - offsetX
   y.value = event.clientY - offsetY
 }
@@ -36,12 +45,9 @@ function stopDrag() {
       style="border-top: 3px solid #6366f1"
       @pointerdown="startDrag"
     >
-      <span class="flex-1 truncate text-sm font-semibold text-slate-800"> Board Node Title </span>
+      <span class="flex-1 truncate text-sm font-semibold text-slate-800"> {{ title }} </span>
     </div>
 
-    <div class="flex flex-col gap-1 px-3 pb-3 pt-1 text-sm text-slate-700">
-      <div>Item 1</div>
-      <div>Item 2</div>
-    </div>
+    <div>{{ content }}</div>
   </div>
 </template>
