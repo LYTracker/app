@@ -10,7 +10,7 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: '/boards',
+          path: '/boards/:id',
           name: 'boards',
           component: () => import('@/pages/boards/Whiteboard.vue'),
           meta: { requiresAuth: true },
@@ -44,7 +44,7 @@ router.beforeEach(async (to) => {
   }
 
   if (to.name === 'login' && authStore.isAuthenticated) {
-    return { name: 'dashboard' }
+    return { name: 'boards' }
   }
 
   return true

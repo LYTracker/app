@@ -1,17 +1,22 @@
+import type { BoardNodeData } from './nodes.types'
+
 export interface CreateBoardPayload {
   title: string
-  description?: string
   ownerId: string
 }
 
 export interface Board {
   id: string
   title: string
-  description?: string
   ownerId: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface BoardWithNodes extends Board {
+  nodes: BoardNodeData[]
 }
 
 export interface UpdateBoardPayload {
   title?: string
-  description?: string
 }

@@ -20,6 +20,7 @@ import { boardService } from '@/services/boards/board.service'
 import { onMounted, ref } from 'vue'
 import type { Board } from '@/services/boards/boards.types'
 import SidebarResizeHandle from './SidebarResizeHandle.vue'
+import NewBoardDialog from '@/components/boards/NewBoardDialog.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -47,13 +48,16 @@ const handleLogout = () => {
 <template>
   <Sidebar collapsible="icon" class="relative">
     <SidebarHeader class="flex-row items-center justify-between">
-      <span class="px-2 text-lg font-semibold group-data-[collapsed=icon]:hidden"
-        >Life Planner</span
-      >
+      <span class="px-2 text-lg font-semibold group-data-[collapsed=icon]:hidden">
+        Life Planner
+      </span>
     </SidebarHeader>
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>Meus Boards</SidebarGroupLabel>
+        <SidebarGroupLabel class="flex items-center justify-between">
+          Meus Boards
+          <NewBoardDialog @created="fetchBoards" />
+        </SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             <SidebarMenuItem v-for="board in boards" :key="board.id">

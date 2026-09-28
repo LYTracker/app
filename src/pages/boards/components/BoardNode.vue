@@ -4,7 +4,7 @@ import { ref } from 'vue'
 interface BoardNodeProps {
   title: string
   type: string
-  content: string
+  content: any
   coordinates: { x: number; y: number }
 }
 
